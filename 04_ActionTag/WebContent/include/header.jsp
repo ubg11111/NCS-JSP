@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
-<%
-	int su = Integer.parseInt(request.getParameter("num"));
-
-%>
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>테스트 페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
 	
-	<h2>JSP 페이지 입니다.</h2>
+	<div align="center">
+		
+		<h1>여기는 헤더 영역입니다.</h1>
+		
+		<br> <br>
+		
+		<hr width="30%" color="red">
+		
+	</div>
 	
 	
 </body>

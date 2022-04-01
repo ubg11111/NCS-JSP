@@ -17,6 +17,7 @@
 			// 회원인 경우
 			// 회원인 경우에는 메인 페이지로 이동 ==> 페이지 이동 
 			// 정보를 이동하는 페이지로 전달하는 방법
+			// key와 value형태로 저장된다. 
 			session.setAttribute("ID", userId);
 			session.setAttribute("PWD", userPwd);
 			session.setAttribute("NAME", "홍길동");

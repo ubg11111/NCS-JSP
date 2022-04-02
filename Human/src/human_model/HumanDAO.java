@@ -79,4 +79,58 @@ public class HumanDAO {
 		}
 		return list;
 	} // getHumanList의 엔드문
+	
+	public int insertHuman(HumanDTO dto) {
+		
+		int result = 0;
+	
+		try {
+			// 1단계 데이터베이스 연결하기
+			sql = "insert into human values(?,?,?,?,?,?)";
+			// 2단계 데이터베이스 전달하기
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, dto.getId());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getJob());
+			pstmt.setInt(4, dto.getAge());
+			pstmt.setString(5, dto.getAddr());
+			pstmt.setString(6,dto.getPhone());
+			
+			// 3단계 연결 확인하기
+			result = pstmt.executeUpdate();
+			
+			// 4단계 오픈되어있는 자원 종료하기.
+			con.close(); pstmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	} // insertHuman() 메서드의 엔드부분
+	
+	public int deleteHuman(int no) {
+		
+		int result = 0;
+		
+	
+		try {
+			sql = "delete from human where id = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			// deleteHuman 메서드의 매개변수인 int no를 받아와 저장해주고 전달해주는 형식
+			pstmt.setInt(1, no);
+			
+			// 작성한 데이터베이스 전달하기
+			result = pstmt.executeUpdate();
+			
+			// 데이터베이스 자원 종료하기
+			con.close(); pstmt.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	} // deleteHuman 메서드의 엔드 부분
 }

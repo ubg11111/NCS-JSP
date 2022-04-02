@@ -16,8 +16,6 @@
 		<br>
 		
 		<a href="<%=request.getContextPath()%>/select">[친구정보 조회]</a>
-		
-	
 	</div>
 	
 </body>

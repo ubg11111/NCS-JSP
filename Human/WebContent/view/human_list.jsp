@@ -39,6 +39,8 @@
 		 		<th>친구 나이</th>
 		 		<th>친구 주소</th>
 		 		<th>친구 번호</th>
+		 		
+		 		<th>친구 삭제</th>
 		 	</tr>
 		 	
 		 		<% 
@@ -54,17 +56,30 @@
 						<td><%=dto.getAge() %></td>
 						<td><%=dto.getAddr() %></td>
 						<td><%=dto.getPhone() %></td>
+						
+						<td>
+							<input type="button" value="친구삭제" 
+							onclick="location.href='delete?no=<%=dto.getId()%>'">
+						</td>
 					</tr>
 				<%		
 						}
 					}else{
 				%>
 					<tr>
-						<td colspan="6" align="center">
+						<td colspan="7" align="center">
 							<h2>검색된 친구가 없어요</h2>						
 						</td>
 					</tr>
 				<% }%>
+				
+			<tr>
+				<td colspan="7" align="center">
+					<input type="button" value="부서추가" 
+					onclick="location.href='insert.jsp'">
+				</td>
+			</tr>
+				
 		</table>
 	</div>
 

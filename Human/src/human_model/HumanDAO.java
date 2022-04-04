@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class HumanDAO {
 	
 	Connection con = null; // DB와 연동하는 객체
@@ -133,4 +134,38 @@ public class HumanDAO {
 		}
 		return result;
 	} // deleteHuman 메서드의 엔드 부분
+	
+	// 회원정보의 전체리스트를 가져와야하므로 DTO객체를 반환형으로 적용한다.
+	public HumanDTO getConectHuman(int no) {
+		
+		// DTO 객체를 생성한후 dto.set메서드에 데이터베이스값을 저장해줘야한다.
+		HumanDTO dto = new HumanDTO();
+		
+		try {
+			// 우선 select where절을 통해서 해당하는 번호를 가져온다
+			sql = "select * from human where id = ? ";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, no);
+			
+			// select절을 통해서 해당 executeQuery을 rs(데이터베이스저장)값에 넣어준다.
+			rs = pstmt.executeQuery();
+			
+			//rs.next를 통해서 번호 차례대로 값을 가져옴
+			if(rs.next()) {
+				dto.setId(rs.getInt("id"));
+				dto.setName(rs.getString("name"));
+				dto.setJob(rs.getString("job"));
+				dto.setAge(rs.getInt("age"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setPhone(rs.getString("phone"));
+			}
+			
+			con.close(); rs.close(); pstmt.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
 }

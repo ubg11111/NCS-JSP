@@ -35,11 +35,7 @@
 		 	<tr>
 		 		<th>친구 아이디</th>
 		 		<th>친구 이름</th>
-		 		<th>친구 직업</th>
-		 		<th>친구 나이</th>
-		 		<th>친구 주소</th>
-		 		<th>친구 번호</th>
-		 		
+				<th>친구 직업</th>		 		
 		 		<th>친구 삭제</th>
 		 	</tr>
 		 	
@@ -51,11 +47,13 @@
 				%>
 					<tr>
 						<td><%=dto.getId()%></td>
-						<td><%=dto.getName() %></td>
+						
+						<td>
+						<a href="<%=request.getContextPath()%>/content.do?num=<%=dto.getId()%>">					
+						<%=dto.getName() %></a>
+						</td>
+						
 						<td><%=dto.getJob() %></td>
-						<td><%=dto.getAge() %></td>
-						<td><%=dto.getAddr() %></td>
-						<td><%=dto.getPhone() %></td>
 						
 						<td>
 							<input type="button" value="친구삭제" 
@@ -67,15 +65,15 @@
 					}else{
 				%>
 					<tr>
-						<td colspan="7" align="center">
+						<td colspan="4" align="center">
 							<h2>검색된 친구가 없어요</h2>						
 						</td>
 					</tr>
 				<% }%>
 				
 			<tr>
-				<td colspan="7" align="center">
-					<input type="button" value="부서추가" 
+				<td colspan="4" align="center">
+					<input type="button" value="친구 추가" 
 					onclick="location.href='insert.jsp'">
 				</td>
 			</tr>

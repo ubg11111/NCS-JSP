@@ -86,4 +86,168 @@ public class MemberDAO {
 		}
 		return list;
 	}; // getMemeberList() 메서드 end 
+	
+	
+	// member10 테이블에 회원을 등록하는 메서드
+	public int insertMember(MemberDTO dto) {
+		
+		int result = 0;
+		int count = 0;
+	
+		try {
+			sql = "select max(num) from member10";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			
+			if(rs.next()) {
+				count = rs.getInt(1) + 1;
+			}
+			
+			sql = "insert into member10 values(?,?,?,?,?,?,?,?,sysdate)";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, count);
+			pstmt.setString(2, dto.getMemid());
+			pstmt.setString(3, dto.getMemname());
+			pstmt.setString(4, dto.getPwd());
+			pstmt.setInt(5, dto.getAge());
+			pstmt.setInt(6, dto.getMileage());
+			pstmt.setString(7, dto.getJob());
+			pstmt.setNString(8, dto.getAddr());
+			
+			result = pstmt.executeUpdate();
+			
+			// 자원종료
+			con.close(); rs.close(); pstmt.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	} // insertMember의 메서드 엔드
+	
+	// 회원번호에 해당하는 회원의 정보를 조회하는 메서드
+	
+	public MemberDTO getContentMember(int no) {
+		
+		MemberDTO dto = new MemberDTO();
+		
+		
+		try {
+			sql = "select * from member10 where num = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				dto.setNum(rs.getInt("num"));
+				dto.setMemid(rs.getString("memid"));
+				dto.setMemname(rs.getString("memname"));
+				dto.setPwd(rs.getString("pwd"));
+				dto.setAge(rs.getInt("age"));
+				dto.setMileage(rs.getInt("mileage"));
+				dto.setJob(rs.getString("job"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setRegdate(rs.getString("regdate"));
+			}
+			
+			rs.close(); pstmt.close(); con.close();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dto;
+	} // getContentMember 메서드 end
+	
+	
+	// MEMBER10 테이블에서 회원번호에 해당하는 회원의 정보를 수정하는 메서드.
+	public int updateMember(MemberDTO dto) {
+		int result = 0;
+		
+		try {
+			sql = "select * from member10 where num = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeQuery();
+		
+			if(rs.next()) {
+				if(rs.getString("pwd").equals(dto.getPwd())) {
+					sql = "update member10 set age= ?,"
+							+ " mileage = ?, job = ?, "
+							+ " addr = ? where num = ?";
+				
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setInt(1, dto.getAge());
+					pstmt.setInt(2, dto.getMileage());
+					pstmt.setString(3, dto.getJob());
+					pstmt.setString(4, dto.getAddr());
+					pstmt.setInt(5, dto.getNum());
+				
+					result = pstmt.executeUpdate();
+				}
+			} else{ // 위에 if조건문의 데이터베이스상의 비밀번호와 폼태그에서 입력한 비밀번호가 다른경우
+				result = -1;
+			}
+			
+			rs.close(); pstmt.close(); con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}// updateMember() 메서드 end
+	
+	
+	// 회원번호에 해당하는 회원을 DB에서 삭제시키는 메서드
+	public int deleteMember(int no) {
+		
+		int result = 0;
+		
+		try {
+			sql = "delete from member10 where num = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+			// 자원종료
+			 pstmt.close(); //con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	} // deleteMember() 메서드 end
+	
+	
+	// 회원 번호 순번 다시 작업해 주는 메서드.
+	public void updateNum(int no) {
+		
+		
+		
+		try {
+			// 현재 삭제되는 선택번호에서 상위번호들은 전부 -1값이 내려가서 정렬된다.
+			sql = "update member10 set num = num -1 where num > ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,no);
+			pstmt.executeUpdate();
+			
+			pstmt.close(); con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}// updateNum() 메서드 end
 }

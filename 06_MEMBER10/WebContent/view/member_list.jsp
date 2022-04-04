@@ -10,7 +10,8 @@
 	List<MemberDTO> member = 	
 				(List<MemberDTO>)request.getAttribute("member");
 	
-
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -27,16 +28,11 @@
 		
 		<br>
 		
-		<table border="1" cellspacing="0" width="900">
+		<table border="1" cellspacing="0" width="350">
 			<tr>
 				<th>회원NO.</th>
 				<th>회원아이디</th>
 				<th>회원명</th>
-				<th>회원비밀번호</th>
-				<th>회원 나이</th>
-				<th>회원 마일리지</th>
-				<th>회원 직업</th>
-				<th>회원 주소</th>
 				<th>가입일</th>
 			</tr>
 			
@@ -49,27 +45,32 @@
 				<tr>
 					<td><%=dto.getNum() %></td>
 					<td><%=dto.getMemid() %></td>
-					<td><%=dto.getMemname() %></td>
-					<td><%=dto.getPwd() %></td>
-					<td><%=dto.getAge() %></td>
-					<td><%=dto.getMileage() %></td>
-					<td><%=dto.getJob() %></td>
-					<td><%=dto.getAddr() %></td>
-					<td><%=dto.getRegdate() %></td>
+					<td>
+					
+					<a href="<%=request.getContextPath()%>/content.do?num=<%=dto.getNum()%>">
+						<%=dto.getMemname() %></a>
+					
+					</td>
+					<td><%=dto.getRegdate().substring(0,10) %></td>
 				</tr>	
 			<% 		
 					}// for문의 end부분
 				}else{ // 데이터가 없는 경우 - 검색된 회원 목록이 없는 경우
 			%>
 				<tr>
-					<td colspan="9" align="center">
+					<td colspan="4" align="center">
 						<h3>검색된 회원이 없습니다.......</h3>
 					</td>
 				</tr>	
 			<% 	} %>
-		
-		
-		
+			
+			
+			<tr>
+				<td colspan="4" align="right">
+					<input type="button" value="회원등록" 
+					onclick="location.href='view/member_join.jsp'">
+				</td>
+			</tr>
 		</table>
 	</div>
 	

@@ -168,4 +168,46 @@ public class HumanDAO {
 		}
 		return dto;
 	}
+	
+	
+	// update 메서드 만들기
+	
+	public int getHumanUpdate(HumanDTO dto) {
+		
+		int result = 0;
+		
+	
+		try {
+			sql = "select * from human where id = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, dto.getId());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				sql = "update human set job = ?,"
+						+ "age = ?, addr = ? , phone = ? where id = ?";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, dto.getJob());;
+				pstmt.setInt(2, dto.getAge());
+				pstmt.setString(3, dto.getAddr());
+				pstmt.setString(4, dto.getPhone());
+				pstmt.setInt(5, dto.getId());
+				
+				result = pstmt.executeUpdate();
+			} else {
+				result = -1;
+			}
+			
+			rs.close(); con.close(); pstmt.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

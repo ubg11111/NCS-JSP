@@ -31,12 +31,11 @@
 		<br><br>
 		
 		
-		<table border="1" cellspacing="0">
+		<table border="1" cellspacing="0" width="400">
 		 	<tr>
 		 		<th>친구 아이디</th>
 		 		<th>친구 이름</th>
 				<th>친구 직업</th>		 		
-		 		<th>친구 삭제</th>
 		 	</tr>
 		 	
 		 		<% 
@@ -55,24 +54,20 @@
 						
 						<td><%=dto.getJob() %></td>
 						
-						<td>
-							<input type="button" value="친구삭제" 
-							onclick="location.href='delete?no=<%=dto.getId()%>'">
-						</td>
 					</tr>
 				<%		
 						}
 					}else{
 				%>
 					<tr>
-						<td colspan="4" align="center">
+						<td colspan="3" align="center">
 							<h2>검색된 친구가 없어요</h2>						
 						</td>
 					</tr>
 				<% }%>
 				
 			<tr>
-				<td colspan="4" align="center">
+				<td colspan="3" align="center">
 					<input type="button" value="친구 추가" 
 					onclick="location.href='insert.jsp'">
 				</td>

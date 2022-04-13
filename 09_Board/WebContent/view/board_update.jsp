@@ -25,9 +25,7 @@
 		
 		
 		<form method="post" action="<%=request.getContextPath()%>/update_ok">
-			
 			<input type="hidden" name ="board_no" value="<%=dto.getBoard_no()%>">
-			
 			<table border="1" cellspacing="0" width="400">
 				<tr>
 					<th>작성자</th>

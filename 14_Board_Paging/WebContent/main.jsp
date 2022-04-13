@@ -9,17 +9,16 @@
 <body>
 	
 	<div align="center">
-		<hr width="30%" color="marmoon">
+		<hr width="30%" color="skyblue">
 			<h3>BOARD 테이블 메인 페이지</h3>
-		<hr width="30%" color="marmoon">
+		<hr width="30%" color="skyblue">
 	
 		<br>
 		
-		<a href="<%=request.getContextPath()%>/select.do">[전체 게시물 목록]</a>
-		
-		
-		
+		<a href="<%=request.getContextPath()%>/board_list.do">[전체 게시물 목록]</a>
+	
 	</div>
-		
+	
+	
 </body>
 </html>

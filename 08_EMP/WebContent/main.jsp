@@ -9,17 +9,15 @@
 <body>
 	
 	<div align="center">
-		<hr width="30%" color="marmoon">
-			<h3>BOARD 테이블 메인 페이지</h3>
-		<hr width="30%" color="marmoon">
-	
+		<hr width="30%" color="skyblue">
+			<h3>EMP 사원</h3>
+		<hr width="30%" color="skyblue">
+		
 		<br>
 		
-		<a href="<%=request.getContextPath()%>/select.do">[전체 게시물 목록]</a>
-		
-		
-		
+		<a href="<%=request.getContextPath()%>/select.do">[전체 사원 목록 조회]</a>
+	
 	</div>
-		
+	
 </body>
 </html>
